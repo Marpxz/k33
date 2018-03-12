@@ -8,6 +8,11 @@ use Kat33\Param;
 
 class ParamController extends Controller
 {
+    public function index()
+    {
+        $params = Param::all();
+        return ParamResource::collection($params);
+    }
     public function store(Request $request){
         $param = new Param();
         $param->speed = $request->input('speed');

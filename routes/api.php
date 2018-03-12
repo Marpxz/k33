@@ -14,4 +14,6 @@ use Illuminate\Http\Request;
 */
 
 Route::post('param','ParamController@store');
+Route::get('params','ParamController@index');
+
 
