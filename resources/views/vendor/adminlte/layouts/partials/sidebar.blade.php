@@ -33,15 +33,53 @@
         <ul class="sidebar-menu">
             <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
-            <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>
-            <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                </ul>
-            </li>
+            <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>Escritorio</span></a></li>
+            @if(Auth::user()->level == 1)
+                <li class="treeview {{ Route::is('businesses.index') || Route::is('businesses.create') ? 'active' : '' }}">
+                    <a href="#"><i class='fa fa-building'></i> <span>Empresas</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('businesses.index') }}">Ver</a></li>
+                        <li><a href="{{ route('businesses.create') }}">Agregar</a></li>
+                    </ul>
+                </li>
+            @endif
+            @if(Auth::user()->level == 1 || Auth::user()->level == 2)
+                <li class="treeview  {{ Route::is('users.index') || Route::is('users.create') ? 'active' : '' }}">
+                    <a href="#"><i class='fa fa-user'></i> <span>Usuarios</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('users.index') }}">Ver</a></li>
+                        <li><a href="{{ route('users.create') }}">Agregar</a></li>
+                    </ul>
+                </li>
+            @endif
+            @if(Auth::user()->level == 2)
+                <li class="treeview {{ Route::is('vehicles.index') || Route::is('vehicles.create') ? 'active' : '' }}">
+                    <a href="#"><i class='fa fa-car'></i> <span>Vehículos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('vehicles.index') }}">Ver</a></li>
+                        <li><a href="{{ route('vehicles.create') }}">Agregar</a></li>
+                    </ul>
+                </li>
+            @endif
+            @if(Auth::user()->level == 2)
+                <li class="treeview  {{ Route::is('routes.index') || Route::is('routes.create') ? 'active' : '' }}">
+                    <a href="#"><i class='fa fa-road'></i> <span>Rutas</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('routes.index') }}">Ver</a></li>
+                        <li><a href="{{ route('routes.create')  }}">Agregar</a></li>
+                    </ul>
+                </li>
+            @endif
+            @if(Auth::user()->level == 2)
+                <li class="treeview  {{ Route::is('kat33s.index') || Route::is('kat33s.create') ? 'active' : '' }}">
+                    <a href="#"><i class='fa fa-wifi'></i> <span>KAT33</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('kat33s.index') }}">Ver</a></li>
+                        <li><a href="{{ route('kat33s.create') }}">Agregar</a></li>
+                    </ul>
+                </li>
+            @endif
+
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
